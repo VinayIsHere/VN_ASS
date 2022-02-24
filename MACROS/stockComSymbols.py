@@ -43,7 +43,7 @@ class StockSymbols(enum.Enum):
     Tata_Consultancy_Services_Ltd=38;
     Tata_Motor_Ltd=39;
     METALS=40;
-    
+
     Tech_Mahindra_Ltd=41;
     Titan_Company_Ltd=42;
     UPL_Ltd=43;
