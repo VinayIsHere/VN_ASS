@@ -1,6 +1,6 @@
 import sys
-sys.path.insert(0, '/home/noor/Desktop/VN_ASS/MACROS')
-sys.path.insert(1, '/home/noor/Desktop/VN_ASS/src/Modules')
+sys.path.insert(0, './MACROS')
+sys.path.insert(1, './src/Modules')
 from stockComSymbols import symbols, StockSymbols
 from nsepy import get_history
 import extract
@@ -14,6 +14,9 @@ def main():
     weeks=2;
     avg=extract.avgFun(data,weeks,months);
     print(avg);
+
+    mdn= extract.median(data,weeks,months);
+    print("median:", mdn)
 
 if __name__ == "__main__":
     main()
