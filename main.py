@@ -8,14 +8,17 @@ import src.Modules.rsicalculation as rsiCal
 from datetime import date
 
 def main():
-    data= get_history(symbols[StockSymbols.Cipla_Ltd], date(2021, 9, 23), date(2022, 2, 1))
+    data = get_history(symbol='IRCTC',
+                       start=date(2022, 2, 1),
+                       end=date.today())
     # print(data);
     # avg=[];
     # months=3;
     # weeks=2;
     # avg=extract.avgFun(data,weeks,months);
     # print(avg);
-    rsi=rsiCal.RSI_pandas_ta(data,14)
+    # rsi=rsiCal.RSI_pandas_ta(data,14)
+    rsi=rsiCal.closepricelist(data,14)
     print(rsi);
 
 
