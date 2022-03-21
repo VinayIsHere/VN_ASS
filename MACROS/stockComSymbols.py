@@ -107,6 +107,8 @@ symbols={
     StockSymbols.Yes_Bank_Ltd:"YESBANK",
     StockSymbols.Zee_Entertainment_Enterprises_Ltd:"ZEEL"};
 
+
+
 # symbol={"Adani_Port_and_Special_Economic_Zone":'ASIANPAINT',
 #     "Asian_Paints_Ltd":"ASIANPAINT",
 #     "Axis_Bank_Ltd":"AXISBANK",
@@ -137,3 +139,6 @@ symbols={
 #     "Larsen_And_Toubro_Ltd":"LT",
 #     "Lupin_Ltd":"LUPIN",
 #     "Mahindra_And_Mahindra_Ltd":"M&M"};
+
+class micros(enum.Enum):
+    multiplier=2;
