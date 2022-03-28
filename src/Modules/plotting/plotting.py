@@ -1,6 +1,8 @@
+from cProfile import label
 import pandas as pd
 import mplcursors
 import matplotlib.pyplot as plt
+from pygments import highlight
 
 
 def figplot(data, RSI):
@@ -17,8 +19,19 @@ def figplot(data, RSI):
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212, sharex=ax1)
 
+    # ax
+   #
+
     # main
-    ax1.plot(combined.index, combined['Close'], color='red')
+    #ax1.plot(combined.index, combined['Close'], color='red')
+    ax1.plot(combined['Close'], linewidth=2, label='CLOSING PRICE')
+    ax1.set_xlabel("Date")
+    ax1.set_ylabel("Closing Price")
+    ax1.set_xlabel('date')
+    ax1.plot(data['st'], color='green', linewidth=2, label='ST UPTREND')
+    ax1.plot(data['dt'], color='r', linewidth=2, label='ST DOWNTREND')
+
+    #
     ax1.set_title(data['Symbol'][1], color='blue')
 
     ax1.grid(True, color='#555555')
@@ -27,9 +40,10 @@ def figplot(data, RSI):
     ax1.figure.set_facecolor('#121212')
     ax1.tick_params(axis='x', colors='white')
     ax1.tick_params(axis='y', colors='white')
+    ax1.legend(loc='upper right')
 
     # RSI Plotting
-    ax2.plot(combined.index, combined['RSI'], color='yellow')
+    ax2.plot(combined.index, combined['RSI'], color='yellow', label='RSI')
 
     # threshold
     b_th = 40
@@ -38,10 +52,12 @@ def figplot(data, RSI):
     ab_th = combined['RSI'] > a_th
     bw_th = combined['RSI'] < b_th
 
-    ax2.scatter(combined.index[bw_th], combined['RSI'][bw_th], color='green')
+    ax2.scatter(combined.index[bw_th], combined['RSI']
+                [bw_th], color='green', label='Below Threshold')
 
-    ax2.scatter(combined.index[ab_th], combined['RSI'][ab_th], color='red')
-
+    ax2.scatter(combined.index[ab_th], combined['RSI']
+                [ab_th], color='red', label='Above Threshold')
+    ax2.legend(loc='upper left')
     ax2.axhline(0, linestyle='--', alpha=0.5, color='#ff0000')
     ax2.axhline(10, linestyle='--', alpha=0.5, color='#ffaa00')
     ax2.axhline(20, linestyle='--', alpha=0.5, color='#00ff00')

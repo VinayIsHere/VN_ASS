@@ -1,5 +1,5 @@
 from MACROS.stockComSymbols import symbols, StockSymbols, micros
-from src.Modules.analysis import rsi, macd, superTrend
+from src.Modules.analysis import rsi, macd, superTrend, s
 from src.Modules.statistics import mean, median
 from src.Modules import extract
 from nsepy import get_history
@@ -8,7 +8,7 @@ from src.Modules.plotting import plotting
 
 
 def main():
-    data = get_history(symbol='IRCTC',
+    data = get_history(symbol='SBIN',
                        start=date(2022, 2, 1),
                        end=date.today())
 
@@ -24,20 +24,24 @@ def main():
 
     # rsi=rsiCal.RSI_pandas_ta(data,14)
 
-    rsiCal = rsi.rsi(data, 14)
+    data['st'], data['upt'], data['dt'], = s.get_supertrend(
+        data['High'], data['Low'], data['Close'], 10, 3)
+    # print(data)
+    rsidata = data.copy()
+    rsiCal = rsi.rsi(rsidata, 14)
+    plotting.figplot(rsidata, rsiCal)
 
-    #macdCal= macd.macd(data, 12, 26, 9)
-    """supertrendval, supertrendBuysell = superTrend.supperTrend(
-        data, 14, micros.multiplier.value)
+    # macdCal= macd.macd(data, 12, 26, 9)"
+
+    """
     print(rsiCal)
     print("-------------")
     # print(macdCal)
     print("-------------")
-    print(supertrendval, supertrendBuysell)
-    """  # call supertrend wrapper
 
+    """  # call supertrend wra
+    # print(supertrendBuysell)
     # call Plotting
-    plotting.figplot(data, rsiCal)
 
 
 if __name__ == "__main__":
